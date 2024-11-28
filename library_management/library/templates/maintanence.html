@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .form-container {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .form-container h2 {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="text"], .form-group input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        .form-group input[type="radio"] {
+            margin-right: 10px;
+        }
+        .form-buttons {
+            text-align: right;
+        }
+        .form-buttons button {
+            padding: 10px 15px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        /* Style for displaying radio buttons in a row */
+        .radio-group {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Membership</h2>
+    <button onclick="showAddMembershipForm()">Add Membership</button>
+    <button onclick="showUpdateMembershipForm()">Update Membership</button>
+</div>
+
+<!-- Add Membership Section (Initially hidden) -->
+<div id="add-membership-form" class="form-container hidden">
+    <h2>Add Membership</h2>
+    <form action="/add-membership" method="POST">
+        <div class="form-group">
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first_name" required>
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last_name" required>
+        </div>
+        <div class="form-group">
+            <label for="contact-name">Contact Name:</label>
+            <input type="text" id="contact-name" name="contact_name" required>
+        </div>
+        <div class="form-group">
+            <label for="contact-address">Contact Address:</label>
+            <input type="text" id="contact-address" name="contact_address" required>
+        </div>
+        <div class="form-group">
+            <label for="adhar-card">Aadhar Card Number:</label>
+            <input type="text" id="adhar-card" name="adhar_card_number" required>
+        </div>
+        <div class="form-group">
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date" name="start_date" required>
+        </div>
+        <div class="form-group">
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date" name="end_date" required>
+        </div>
+        <div class="form-group">
+            <label>Membership Duration:</label>
+            <div class="radio-group">
+                <label for="six-months">
+                    <input type="radio" id="six-months" name="membership" value="6-months" required> 6 Months
+                </label>
+                <label for="one-year">
+                    <input type="radio" id="one-year" name="membership" value="1-year" required> 1 Year
+                </label>
+                <label for="two-years">
+                    <input type="radio" id="two-years" name="membership" value="2-years" required> 2 Years
+                </label>
+            </div>
+        </div>
+        <div class="form-buttons">
+            <button type="reset">Cancel</button>
+            <button type="submit">Confirm</button>
+        </div>
+    </form>
+</div>
+
+<!-- Update Membership Section (Initially hidden) -->
+<div id="update-membership-form" class="form-container hidden">
+    <h2>Update Membership</h2>
+    <form action="/update-membership" method="POST">
+        <div class="form-group">
+            <label for="membership-number">Membership Number:</label>
+            <input type="text" id="membership-number" name="membership_number" required>
+        </div>
+        <div class="form-group">
+            <label for="start-date-update">Start Date:</label>
+            <input type="date" id="start-date-update" name="start_date" required>
+        </div>
+        <div class="form-group">
+            <label for="end-date-update">End Date:</label>
+            <input type="date" id="end-date-update" name="end_date" required>
+        </div>
+        <div class="form-group">
+            <label>Membership Extension:</label>
+            <div class="radio-group">
+                <label for="six-months-update">
+                    <input type="radio" id="six-months-update" name="membership_extension" value="6-months"> 6 Months
+                </label>
+                <label for="one-year-update">
+                    <input type="radio" id="one-year-update" name="membership_extension" value="1-year"> 1 Year
+                </label>
+                <label for="two-years-update">
+                    <input type="radio" id="two-years-update" name="membership_extension" value="2-years"> 2 Years
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Remove Membership:</label>
+            <div class="radio-group">
+                <label for="remove-membership">
+                    <input type="radio" id="remove-membership" name="remove_membership" value="yes"> Yes
+                </label>
+                <label for="remove-membership-no">
+                    <input type="radio" id="remove-membership-no" name="remove_membership" value="no"> No
+                </label>
+            </div>
+        </div>
+        <div class="form-buttons">
+            <button type="reset">Cancel</button>
+            <button type="submit">Confirm</button>
+        </div>
+    </form>
+</div>
+
+
+<div class="form-container">
+    <h2>Books/Movies</h2>
+    <button onclick="showAddbookmovieForm()">Add Book/Movie</button>
+    <button onclick="showUpdatebookmovieForm()">Update Book/Movie</button>
+</div>
+
+<!-- Add Book/Movie Section (Initially hidden) -->
+<div id="add-book/movie-form" class="form-container hidden">
+    <h2>Add Book/Movie</h2>
+    <form action="/add-book/movie" method="POST">
+        <div class="form-group">
+            <label>Book or Movie:</label>
+            <div class="radio-group">
+                <label for="book">
+                    <input type="radio" id="book" name="book_or_movie" value="book"> Book
+                </label>
+                <label for="movie">
+                    <input type="radio" id="movie" name="book_or_movie" value="movie"> Movie
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="book_or_movie_name">Book/Movie Name:</label>
+            <input type="text" id="book_or_movie_name" name="book/movie_name" required>
+        </div>
+        <div class="form-group">
+            <label for="date_of_procurement">Date of Procurement:</label>
+            <input type="date" id="date_of_procurement" name="date" required>
+        </div>
+        <div class="form-group">
+            <label for="quantity_copies">Quantity/Copies:</label>
+            <input type="number" id="quantity_copies" name="quantity_copies" required>
+        </div>
+        <div class="form-buttons">
+            <button type="reset">Cancel</button>
+            <button type="submit">Confirm</button>
+        </div>
+    </form>
+</div>
+
+<!-- Update Book/Movie Section (Initially hidden) -->
+<div id="update-book/movie-form" class="form-container hidden">
+    <h2>Update Book/Movie</h2>
+    <form action="/update-book/movie" method="POST">
+        <div class="form-group">
+            <label>Book or Movie:</label>
+            <div class="radio-group">
+                <label for="book">
+                    <input type="radio" id="book" name="book_or_movie" value="book"> Book
+                </label>
+                <label for="movie">
+                    <input type="radio" id="movie" name="book_or_movie" value="movie"> Movie
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="book_or_movie_name">Book/Movie Name:</label>
+            <input type="text" id="book_or_movie_name" name="book/movie_name" required>
+        </div>
+        <div class="form-group">
+            <label for="serial_no">Serial No:</label>
+            <input type="number" id="serial_no" name="serial_no" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="" disabled selected>Select Status</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <option value="pending">Pending</option>
+                <option value="suspended">Suspended</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+        </div>
+        <div class="form-buttons">
+            <button type="reset">Cancel</button>
+            <button type="submit">Confirm</button>
+        </div>
+    </form>
+</div>
+
+<div class="form-container">
+    <h2>User Management</h2>
+    <button onclick="showAddUserForm()">Add User</button>
+    <button onclick="showUpdateUserForm()">Update User</button>
+</div>
+
+<div id="add-user-management-form" class="form-container hidden">
+    <h2>Add User</h2>
+    <form action="/add-user" method="POST">
+        <div class="form-group">
+            <div class="radio-group">
+                <label for="new_user">
+                    <input type="radio" id="new_user" name="new_user" value="new_user"> New User
+                </label>
+                <label for="existing_user">
+                    <input type="radio" id="existing_user" name="existing_user" value="existing_user"> Existing User
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <input type="checkbox" id="status" name="status" required>
+        </div>
+        <div class="form-group">
+            <label for="admin">Admin:</label>
+            <input type="checkbox" id="admin" name="admin" required>
+        </div>
+        <div class="form-buttons">
+            <button type="reset">Cancel</button>
+            <button type="submit">Confirm</button>
+        </div>
+    </form>
+</div>
+
+<div id="update-user-management-form" class="form-container hidden">
+    <h2>Update User</h2>
+    <form action="/update-user" method="POST">
+        <div class="form-group">
+            <div class="radio-group">
+                <label for="new_user">
+                    <input type="radio" id="new_user" name="new_user" value="new_user"> New User
+                </label>
+                <label for="existing_user">
+                    <input type="radio" id="existing_user" name="existing_user" value="existing_user"> Existing User
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <input type="checkbox" id="status" name="status" required>
+        </div>
+        <div class="form-group">
+            <label for="admin">Admin:</label>
+            <input type="checkbox" id="admin" name="admin" required>
+        </div>
+        <div class="form-buttons">
+            <button type="reset">Cancel</button>
+            <button type="submit">Confirm</button>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    // Function to show the Add Membership form
+    function showAddMembershipForm() {
+        document.getElementById('add-membership-form').classList.remove('hidden');
+        document.getElementById('update-membership-form').classList.add('hidden');
+    }
+
+    // Function to show the Update Membership form
+    function showUpdateMembershipForm() {
+        document.getElementById('update-membership-form').classList.remove('hidden');
+        document.getElementById('add-membership-form').classList.add('hidden');
+    }
+    // Function to show the Add Book/Movie form
+    function showAddbookmovieForm() {
+        document.getElementById('add-book/movie-form').classList.remove('hidden');
+        document.getElementById('update-book/movie-form').classList.add('hidden');
+    }
+
+    // Function to show the Update Book/Movie form
+    function showUpdatebookmovieForm() {
+        document.getElementById('update-book/movie-form').classList.remove('hidden');
+        document.getElementById('add-book/movie-form').classList.add('hidden');
+    }
+    // Function to show the Update User Management form
+    function showAddUserForm() {
+        document.getElementById('add-user-management-form').classList.remove('hidden');
+        document.getElementById('update-user-management-form').classList.add('hidden');
+    }
+    // Function to show the Update User Management form
+    function showUpdateUserForm() {
+        document.getElementById('update-user-management-form').classList.remove('hidden');
+        document.getElementById('add-user-management-form').classList.add('hidden');
+    }
+    function hideForms() {
+        document.getElementById("add-user-form").style.display = "none";
+        document.getElementById("update-user-form").style.display = "none";
+    }
+
+</script>
+
+</body>
+</html>
